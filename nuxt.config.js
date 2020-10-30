@@ -18,7 +18,8 @@ export default {
     {src: 'primevue/resources/primevue.min.css'},
     {src: 'primevue/resources/themes/md-light-indigo/theme.css'},
     {src: 'primeicons/primeicons.css'},
-    {src: '~/assets/css/main.css'}
+    {src: '~/assets/css/main.scss'},
+    {src: 'primeflex/primeflex.css'}
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
@@ -31,6 +32,14 @@ export default {
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
+    ['@nuxtjs/fontawesome', {
+      component: 'FaIcon',
+      suffix: false,
+      icons: {
+        solid: true,
+        brands: true
+      }
+    }]
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
