@@ -24,7 +24,8 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    {src:'~/plugins/primevue.js', mode: 'client'}
+    {src:'~/plugins/primevue.js', mode: 'client'},
+    { src: '~/plugins/vueagile.js', mode: 'client' }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -53,5 +54,6 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-  }
+    transpile: ['vueagile']
+}
 }

@@ -48,8 +48,7 @@
 
           <div class="p-col-12 p-md-7 p-lg-7 p-xl-7  p-p-0">
             <div class="advanced-search p-grid p-nogutter">
-              <Button class="category-btn p-col-3" @click="categoriesMenu">Todas</Button>
-              <Menu ref="categorias" :model="categories" :popup="true" />
+              <Dropdown v-model="searchCategory" :options="searchOptions" optionLabel="name" :filter="true" :showClear="true" placeholder="Todas"/>
               <div class="p-inputgroup p-col">
                 <InputText placeholder="O que você precisa?" />
                 <Button icon="pi pi-search" class="p-button-warning" />
@@ -68,13 +67,16 @@
                   </nuxt-link>
                 </li>
                 <li class="cart-icon">
-                  <nuxt-link to="/carrinho">
+                  <a @click="cart.show = true"><span class="p-overlay-badge">
+                      <i class="pi pi-shopping-cart"></i><span class="p-badge">{{ cart.num }}</span>
+                    </span></a>
+                  <!-- <Button @click="cartSidebar = true">
                     <span class="p-overlay-badge">
                       <i class="pi pi-shopping-cart"></i><span class="p-badge">2</span>
                     </span>
-                  </nuxt-link>
+                  </Button> -->
                 </li>
-                <li class="cart-price">R$ 200.00</li>
+                <li class="cart-price">R$ {{ cart.total }}</li>
               </ul>
             </div>
           </div>
@@ -220,6 +222,9 @@
 
     </footer>
 
+    <Sidebar :visible.sync="cart.show" position='right'>
+    </Sidebar>
+
   </div>
 </template>
 
@@ -227,7 +232,19 @@
   export default {
     data() {
       return {
+        searchCategory: null,
+        searchOptions: [
+          { name:  'Femininas', code: 'Femininas'},
+          { name:  'Masculinas', code: 'Masculinas'},
+          { name:  'Acessórios', code: 'Acessórios'},
+          { name:  'Infantil', code: 'Infantil'},
+        ],
         year: new Date().getFullYear() ,
+        cart: {
+          show: false,
+          total: 200.00,
+          num: 1
+        },
         menu: [{
             label: 'Todos os Departamentos',
             icon: 'pi pi-bars',
@@ -299,44 +316,10 @@
             }
           },
         ],
-        categories: [{
-            label: 'Feminina',
-            command: (event) => {
-              this.$router.push('loja')
-            }
-          },
-          {
-            label: 'Masculina',
-            command: (event) => {
-              this.$router.push('loja')
-            }
-          },
-          {
-            label: 'Íntima',
-            command: (event) => {
-              this.$router.push('loja')
-            }
-          },
-          {
-            label: 'Infantil',
-            command: (event) => {
-              this.$router.push('loja')
-            }
-          },
-          {
-            label: 'Acessórios',
-            command: (event) => {
-              this.$router.push('loja')
-            }
-          },
-        ],
       }
 
     },
     methods: {
-      categoriesMenu: function (event) {
-        this.$refs.categorias.toggle(event);
-      }
 
     }
   }
